@@ -7,18 +7,19 @@ function App() {
 
   const stock = 10;
   const initial = 1;
-
+  const show = true;
   return (
     <div className="App">
       <header className="App-header">
         <NavBar/>
       </header>
-      <body>
+      <div>
         <ItemListContainer greeting="Hola"/>
-        <ItemCount stock={stock} initial={initial} />
-      </body>
+        {show ? null : <ItemCount stock={stock} initial={initial}/>}
+      </div>
     </div>
   );
 }
 
 export default App;
+ 
