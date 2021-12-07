@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
-const Item = ({product}) => {
+const ItemDetail = ({ productDetail }) => {
 
-    const { title, price, thumbnail } = product;
+    const { title, price, thumbnail } = productDetail;
 
     return (
         <div className='col' style={{margin:'1rem'}}>
@@ -21,4 +21,4 @@ const Item = ({product}) => {
     );
 }
  
-export default Item;
+export default ItemDetail;
