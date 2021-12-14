@@ -1,6 +1,17 @@
-# Getting Started with Create React App
+# Funciones disponibles
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Podremos encontrar las funciones disponibles para el proyecto dentro de el archivo scripts.js
+Las funciones disponibles son:
+### GetItem
+Retorna un array con todas los productos disponibles.
+
+### GetProducts
+Toma como parametro la categoria del productos que queremos utilizar, busca esa categoria dentro de la lista de productos
+y filtra los productos por esa categoria
+
+### GetProductById
+Toma como parametro el ID del producto que queremos utilizar, busca ese id dentro de la lista de productos y nos devuelve
+unicamente el registro con el que comparte el ID.
 
 ## Available Scripts
 

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-
 const Buscador = ({ setlistProduct }) => {
 
     const [searchWord, setSearchWord] = useState('remera')
 
     function handleClick(e){
         e.preventDefault()
+
+        //console.log(getItem(searchWord))
 
         fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${searchWord}`)
         .then(response => {
@@ -33,7 +34,7 @@ const Buscador = ({ setlistProduct }) => {
         })
         .then(res =>{
             setlistProduct(res.results)
-            console.log(res.results)
+            //console.log(res.results)
         })
         .catch(err =>{
             console.log(err)

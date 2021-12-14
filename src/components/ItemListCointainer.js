@@ -1,15 +1,32 @@
-import React, { Fragment, useState } from 'react';
-import Buscador from './Buscador';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { getProducts } from '../scripts';
 import ItemList from './ItemList';
 
-const ItemListContainer = () => {
+const ItemListContainer = ({setlistProduct}) => {
 
-  const [listProduct, setlistProduct] = useState([])
+  
+  const [products, setProducts] = useState([])
 
+  const {category} = useParams();
+
+  useEffect(() => {
+    getProducts(category).then(item =>{
+      setProducts(item)
+    }).catch(err=>{
+      console.log(err)
+    })
+
+    return(()=>{
+      setProducts([])
+    })
+
+  }, [category])
+
+  //<Buscador setlistProduct={setlistProduct}/>
   return ( 
     <Fragment>
-      <Buscador setlistProduct={setlistProduct}/>
-      <ItemList listProduct={listProduct}/>
+      <ItemList products={products}/>
     </Fragment>
   );
 }
