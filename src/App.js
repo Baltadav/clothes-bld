@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ItemListContainer from './components/ItemListCointainer.js';
-import NavBar from './components/NavBar.js';
+import NavBar from './components/NavBar/NavBar.js';
+import ItemListContainer from './components/ItemListContainer/ItemListCointainer.js';
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer.js';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import ItemDetailContainer from './components/ItemDetailContainer.js';
 import { useEffect, useState } from 'react';
 import {getProducts } from './scripts.js';
 

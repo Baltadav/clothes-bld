@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { getProducts } from '../scripts';
-import ItemList from './ItemList';
+import { getProducts } from '../../scripts';
+import ItemList from './ItemList.js';
 
 const ItemListContainer = ({setlistProduct}) => {
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import ItemCount from './ItemCount';
 
 const ItemDetail = ({ product }) => {
 
-    const { name, price, img } = product;
+    const { name, price, img, stock, description } = product;
 
     return (
         <div className='col' style={{margin:'1rem'}}>
@@ -13,8 +14,11 @@ const ItemDetail = ({ product }) => {
                     <Card.Title>{name}</Card.Title>
                     <Card.Text>
                         ${price}
+                        <br/>
+                        {description}
                     </Card.Text>
                 </Card.Body>
+                <ItemCount stock={stock}/>
             </Card>
         </div>
     );
