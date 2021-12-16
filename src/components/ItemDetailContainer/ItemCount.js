@@ -1,7 +1,6 @@
-import React, { Fragment } from 'react';
-import { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
-const ItemCount = ({stock}) => {
+const ItemCount = ({stock, onConfirm}) => {
 
     const [cantidadArticulo, setCantidadArticulo] = useState(1);
 
@@ -21,10 +20,11 @@ const ItemCount = ({stock}) => {
         }
     }
 
-    function agregarCarrito(e){
-        e.preventDefault();
+    const onClick = (e) =>{
+        e.preventDefault(); 
+        onConfirm(cantidadArticulo);
     }
-
+    
     return (  
         <Fragment>
             <form className="bg-light form md-2">
@@ -41,15 +41,12 @@ const ItemCount = ({stock}) => {
                             <div className="col">
                                 {cantidadArticulo === stock?<button onClick={sumarArticulo} className="btn btn-secondary disabled">+</button>:<button onClick={sumarArticulo} className="btn btn-outline-primary">+</button>}
                             </div>
-                            
-
+     
                         </div>
                         <div className="row">
-
                             <div className="col">
-                                <button onClick={agregarCarrito} className="btn btn-outline-primary">Agregar al carrito</button>
+                                <button onClick={onClick} className="btn btn-outline-primary">Agregar al carrito</button>
                             </div>
-
                         </div>
                     </div>
                 </div>

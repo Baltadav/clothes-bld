@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
+import ButtonCount from './ButtonCount';
 import ItemCount from './ItemCount';
 
 const ItemDetail = ({ product }) => {
 
+    const [inputType, setInputType] = useState('')
+
     const { name, price, img, stock, description } = product;
+
+    const Count = inputType === 'input' ? ButtonCount : ItemCount;
+
+    const addToCart = (count) =>{
+        console.log('Se agrego al carrito')
+        console.log(count)
+
+        if(count !== 0){
+            setInputType('input')
+        }
+    }
 
     return (
         <div className='col' style={{margin:'1rem'}}>
@@ -18,7 +32,8 @@ const ItemDetail = ({ product }) => {
                         {description}
                     </Card.Text>
                 </Card.Body>
-                <ItemCount stock={stock}/>
+
+                <Count stock={stock} onConfirm={addToCart}/>
             </Card>
         </div>
     );
