@@ -6,7 +6,7 @@ const ButtonCount = ({ onConfirm }) => {
     return (
         <div>
             <Link to={'/cart'}>
-                <button onClick={() => onConfirm()}>Terminar mi compra</button>
+                Ir al carrito 
             </Link>
         </div>
     );

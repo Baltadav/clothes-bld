@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import ButtonCount from './ButtonCount';
 import ItemCount from './ItemCount';
+import CartContext from '../context/CartContext';
 
 const ItemDetail = ({ product }) => {
 
-    const [inputType, setInputType] = useState('')
-
+    const [inputType, setInputType] = useState('');
+    
     const { name, price, img, stock, description } = product;
+    const { addItem } = useContext(CartContext)
 
     const Count = inputType === 'input' ? ButtonCount : ItemCount;
 
     const addToCart = (count) =>{
-        console.log('Se agrego al carrito')
-        console.log(count)
-
-        if(count !== 0){
-            setInputType('input')
-        }
+        addItem(product, count);
+        setInputType('input');
     }
+
+    useEffect(() => {
+        //console.log(`Producto cargado ${product.name}`)
+    }, [product])   
 
     return (
         <div className='col' style={{margin:'1rem'}}>
