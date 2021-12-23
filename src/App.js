@@ -3,32 +3,10 @@ import NavBar from './components/NavBar/NavBar.js';
 import ItemListContainer from './components/ItemListContainer/ItemListCointainer.js';
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer.js';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import {getProducts } from './scripts.js';
 import {CartContextProvider} from './components/context/CartContext.js';
 import CartContainer from './components/Cart/CartContainer.js';
 
 function App() {
-
-  const [listProduct, setlistProduct] = useState([])
-  const stock = 10;
-  const initial = 1;
-  
-  useEffect(() => {
-    const list = getProducts()
-    
-    list.then(item => {
-      setlistProduct(item)
-    }).catch(err  => {
-        console.log(err)
-    })
-
-    return (() => {
-      setlistProduct([])
-    })
-  }, [])
-  
-
   return (
     <div className="App">
       <CartContextProvider>
@@ -38,13 +16,13 @@ function App() {
             </header>
             <Switch>\
               <Route exact path='/'>
-                <ItemListContainer listProduct={listProduct} setlistProduct={setlistProduct}/>
+                <ItemListContainer />
               </Route>
               <Route path='/category/:category'>
-                <ItemListContainer listProduct={listProduct} />
+                <ItemListContainer />
               </Route>
               <Route path='/item/:productId'>
-                <ItemDetailContainer stock={stock} initial={initial}/>
+                <ItemDetailContainer/>
               </Route>
               <Route path='/cart'>
                 <CartContainer/>

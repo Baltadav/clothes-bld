@@ -1,29 +1,34 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { getProducts } from '../../scripts';
 import ItemList from './ItemList.js';
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 
-const ItemListContainer = ({setlistProduct}) => {
-
-  
+const ItemListContainer = () => {
   const [products, setProducts] = useState([])
-
-  const {category} = useParams();
+  const { category } = useParams();
 
   useEffect(() => {
-    getProducts(category).then(item =>{
-      setProducts(item)
-    }).catch(err=>{
-      console.log(err)
-    })
+    const db = getFirestore();
+    
+    const total = collection(db, "items");
 
+    if(!category){
+      getDocs(total).then((snapshot) => {
+        setProducts(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data() })));
+      });
+    }else{
+      const cat_filter = query(
+        total,
+        where("category", "==", category));
+      getDocs(cat_filter).then((snapshot) => {
+        setProducts(snapshot.docs.map((doc) => ({id: doc.id, ...doc.data() })));
+      });
+    }
     return(()=>{
       setProducts([])
     })
+  }, [category]);
 
-  }, [category])
-
-  //<Buscador setlistProduct={setlistProduct}/>
   return ( 
     <Fragment>
       <ItemList products={products}/>

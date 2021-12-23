@@ -27,7 +27,7 @@ export const CartContextProvider = ({children}) => {
     };
 
     const removeItem = (itemId) => {
-        const newCart = cart.filter((element) => parseInt(element.id) !== parseInt(itemId))
+        const newCart = cart.filter((element) => element.id !== itemId)
         
         setCart(newCart)
     };
