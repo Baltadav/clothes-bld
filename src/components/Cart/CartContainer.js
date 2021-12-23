@@ -1,26 +1,68 @@
 import React, { Fragment, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import CartContext from '../context/CartContext';
 import CartElement from './CartElement';
 
 const CartContainer = () => {
 
-    const { cart, clear } = useContext(CartContext);
+    const { cart, clear, getTotalPrice} = useContext(CartContext);
 
-    return ( 
+    /* const buyerItem = {
+        buyer:{
+            name:'',
+            phone:'',
+            email:''
+        },
+        items:[
+            {
+                item: '',
+                title: '',
+                price: ''
+            }
+        ]
+    } */
+
+    return (
         <Fragment>
-            <p>Desde cart</p>
-            
-            <table bgcolor="#C0C0C0">
-                <tr>
-                    <th>Nombre del producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                </tr>
-                {cart.map((product)=> <CartElement key={product.id} product={product}/>)}
-            </table>
+            <h4>Carro de compras</h4>
+            {cart.length === 0
+            ?   
+            <div className='container justify-content-center'>
+                <p>Carrito vacio, no se agregaron articulos</p>
+                <Link to={'/'} className='btn btn-primary' >Volver al inicio</Link>
+            </div>
+            :
+            <div className='container'>
+                <div className="container justify-content-center">
+                    <div className='row'>
+                        <div className='col'>
+                            Producto
+                        </div>
+                        <div className='col'>
+                            Precio por unidad
+                        </div>
+                        <div className='col'>
+                            Cantidad
+                        </div>
+                        <div className='col'>
+                            Total parcial
+                        </div>
+                        <div className='col'>
+                            
+                        </div>
+                    </div>
                 
+                    {cart.map((product)=> <CartElement key={product.id} product={product} />)}
+                </div>
+
+                <h5>Total: ${getTotalPrice()}</h5>
+                <div className='d-flex justify-content-center'>
+                    <button onClick={clear}>Cancelar compra</button>
+                    <button >Continuar compra</button>
+                </div>
+            </div>
+            }
             
-            <button onClick={clear}>Limpiar carrito</button>
         </Fragment>
     );
 }

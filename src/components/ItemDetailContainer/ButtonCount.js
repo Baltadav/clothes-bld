@@ -6,7 +6,9 @@ const ButtonCount = ({ onConfirm }) => {
     return (
         <div>
             <Link to={'/cart'}>
-                Ir al carrito 
+                <button className='btn btn-outline-primary'>
+                    Ir al carrito 
+                </button> 
             </Link>
         </div>
     );

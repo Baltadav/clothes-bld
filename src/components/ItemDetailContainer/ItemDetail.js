@@ -14,8 +14,10 @@ const ItemDetail = ({ product }) => {
     const Count = inputType === 'input' ? ButtonCount : ItemCount;
 
     const addToCart = (count) =>{
-        addItem(product, count);
-        setInputType('input');
+        if (name !== '') {
+            addItem(product, count);
+            setInputType('input');
+        }
     }
 
     useEffect(() => {

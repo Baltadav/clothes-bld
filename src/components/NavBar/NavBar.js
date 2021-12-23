@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CartWidget from './CartWidget';
 import { Link } from 'react-router-dom';
+import CartContext from '../context/CartContext';
 
 const NavBar = () => {
+    const { getTotalProduct } = useContext(CartContext)
+
     return ( 
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
@@ -33,7 +36,8 @@ const NavBar = () => {
                     </ul>
                 </div>
             </div>
-            <CartWidget cartTotal="2"/>
+
+            {getTotalProduct() === 0 ? <p></p> : <CartWidget/>  }
         </div>
     </nav>
     );
