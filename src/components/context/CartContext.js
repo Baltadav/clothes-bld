@@ -43,7 +43,7 @@ export const CartContextProvider = ({children}) => {
     const getTotalProduct = () => {
         let counter = 0;
         cart.forEach( element => counter = counter +  parseInt(element.quantity))
-        console.log(counter + ' totalproduct')
+        //console.log(counter + ' totalproduct')
         return counter
     }
 

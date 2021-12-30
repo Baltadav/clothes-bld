@@ -1,26 +1,37 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CartContext from '../context/CartContext';
 import CartElement from './CartElement';
+import {  getFirestore, addDoc, Timestamp, collection } from "firebase/firestore";
+//import * as firebase from 'firebase/app'
 
 const CartContainer = () => {
 
     const { cart, clear, getTotalPrice} = useContext(CartContext);
 
-    /* const buyerItem = {
-        buyer:{
-            name:'',
-            phone:'',
-            email:''
-        },
-        items:[
-            {
-                item: '',
-                title: '',
-                price: ''
-            }
-        ]
-    } */
+    const [userInfo, setUserInfo] = useState({})
+    useEffect(() => {
+        setUserInfo({
+            name: 'Juan',
+            lastName:'del Pilar',
+            email: 'jaunchito@delpili.com'
+        })
+    }, [])
+    const handleClick = () => {
+
+        const newOrder = {
+            buyer: userInfo,
+            items: cart,
+            total: getTotalPrice(),
+            date: Timestamp.fromDate( new Date())
+        }
+
+        const db = getFirestore();
+        addDoc(collection(db, "orders"), newOrder);
+        console.log('Registro ok');
+        clear();
+        console.log('carrito en 0');
+    }
 
     return (
         <Fragment>
@@ -58,7 +69,10 @@ const CartContainer = () => {
                 <h5>Total: ${getTotalPrice()}</h5>
                 <div className='d-flex justify-content-center'>
                     <button onClick={clear}>Cancelar compra</button>
-                    <button >Continuar compra</button>
+                    <Link to='/'>
+                        <button onClick={handleClick} >Continuar compra</button>
+                    </Link>
+                    
                 </div>
             </div>
             }
